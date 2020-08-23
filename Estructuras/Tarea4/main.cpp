@@ -61,10 +61,10 @@ public:
 };
 
 // Funcion que lee el archivo
-void LeerArchivo(Producto aProducto[],int capArray){
+void ObtenerInfo(Producto aProducto[],int capArray){
     
     int numProductos,gramos,calorias;
-    string firstLine;
+    string firstLine,nombre;
     char nombreArchivo[30];
 
     //Preguntamos el nombre del archivo
@@ -73,28 +73,34 @@ void LeerArchivo(Producto aProducto[],int capArray){
     
     //Declaramos y abrimos el archivo
     fstream nuevoArchivo;
-    nuevoArchivo.open(nombreArchivo, ios::in);
+    nuevoArchivo.open(nombreArchivo);
+    if (!nuevoArchivo.is_open()) {
+        cout<<"No se ha encontrado o no se ha podido abrir el archivo con ese nombre"<<endl;
+    }
     //Se lee la primera linea que indica el numero de productos del programa
     getline(nuevoArchivo,firstLine);
+    // Convierte el string a int
     stringstream stoInt(firstLine);
     stoInt>>numProductos;
     cout<<numProductos<<endl;
     
     string lines;
     while (!nuevoArchivo.eof() && nuevoArchivo.is_open()) {
-        for (int i = 0; i<numProductos; i++) {
-            getline(nuevoArchivo,lines,' ');
-            cout<<"La linea que lee es "<<lines<<endl;
-            aProducto[i].setNombre(lines);
-            getline(nuevoArchivo,lines,' ');
-            stringstream stoInt(lines);
-            stoInt>>gramos;
-            cout<<"La linea que lee es "<<lines<<endl;
+        for (int i = 0; i<=numProductos; i++) {
+            //Lee linea por linea el txt
+            getline(nuevoArchivo,lines);
+            //Lee en la linea i un string hasta que se encuentre con un espacio
+            stringstream linestream(lines);
+            getline(linestream,nombre,' ');
+            cout<<"La linea que lee es "<<nombre<<" va en el loop "<<i<<endl;
+            // Le asignamos el valor al atributo de ese producto
+            aProducto[i].setNombre(nombre);
+            // Lee en la linea i un int hasta que se encuentra con un espacio
+            linestream>>gramos >>calorias;
+            // Le asignamos el valor al atributo de ese producto
             aProducto[i].setGramos(gramos);
-            getline(nuevoArchivo,lines,' ');
-            stoInt>>calorias;
-            cout<<"La linea que lee es "<<lines<<endl;
             aProducto[i].setCalorias(calorias);
+            
         }
     }
     for (int i = 0; i<=numProductos; i++) {
@@ -111,7 +117,7 @@ void LeerArchivo(Producto aProducto[],int capArray){
 int main(int argc, const char * argv[]) {
     
     Producto* aProducto = new Producto[100];
-    LeerArchivo(aProducto, 100);
+    ObtenerInfo(aProducto, 100);
     
     return 0;
 }
