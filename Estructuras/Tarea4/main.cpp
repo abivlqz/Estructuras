@@ -13,6 +13,7 @@
 
 using namespace std;
 
+int numProductos;
 class Producto{
     //Atributos
 private:
@@ -21,10 +22,10 @@ private:
     
 public:
     //Constructor1
-    Producto(string _nombre, int _gramos, int _calorias){
-        nombre = _nombre;
-        gramos = _gramos;
-        calorias = _calorias;
+    Producto(string nombre, int gramos, int calorias){
+        this->nombre = nombre;
+        this->gramos = gramos;
+        this->calorias = calorias;
         
     }
     //Constructor2 para el arreglo de objetos
@@ -32,38 +33,67 @@ public:
         
     }
     //Metodos de acceso
-    string getNombre(Producto p){
+    string getNombre(){
         return nombre;
     }
-    int getGramos(Producto p){
+    int getGramos(){
         return gramos;
     }
-    int getCalorias(Producto p){
+    int getCalorias(){
         return calorias;
     }
-    void setNombre(string _nombre){
-        nombre = _nombre;
+    void setNombre(string nombre){
+        this->nombre = nombre;
     }
-    void setGramos(int _gramos){
-        gramos = _gramos;
+    void setGramos(int gramos){
+        this->gramos = gramos;
     }
-    void setCalorias(int _calorias){
-        calorias = _calorias;
+    void setCalorias(int calorias){
+        this->calorias = calorias;
     }
     
     void mostrarProducto(){
-        cout<<"Nombre del producto "<<nombre<<endl;
-        cout<<"cantidad de gramos "<<gramos<<endl;
-        cout<<"cantidad de calorias "<<calorias<<endl;
+        cout<<nombre<<" ";
+        cout<<gramos<<" ";
+        cout<<calorias<<endl;
+    }
+    
+    //compara producto < otro producto pasado por referencia
+    bool operator <(Producto& producto){
+        if (producto.getNombre()<this->nombre) {
+            return false;
+        }
+        else if (producto.getNombre()<this->nombre){
+            return true;
+        }
+        else{
+            if (producto.getGramos()<this->gramos) {
+                return false;
+            }
+            else if (producto.getGramos()<this->gramos){
+                return true;
+            }
+            else{
+                if (producto.getCalorias()<this->calorias) {
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        }
+        
+        
+        
     }
     
     
 };
 
-// Funcion que lee el archivo
+// Funcion que lee el archivo y guarda los valores en su respectivo atributo de su clase
 void ObtenerInfo(Producto aProducto[],int capArray){
     
-    int numProductos,gramos,calorias;
+    int gramos,calorias;
     string firstLine,nombre;
     char nombreArchivo[30];
 
@@ -74,15 +104,13 @@ void ObtenerInfo(Producto aProducto[],int capArray){
     //Declaramos y abrimos el archivo
     fstream nuevoArchivo;
     nuevoArchivo.open(nombreArchivo);
-    if (!nuevoArchivo.is_open()) {
-        cout<<"No se ha encontrado o no se ha podido abrir el archivo con ese nombre"<<endl;
-    }
+    
     //Se lee la primera linea que indica el numero de productos del programa
     getline(nuevoArchivo,firstLine);
     // Convierte el string a int
     stringstream stoInt(firstLine);
     stoInt>>numProductos;
-    cout<<numProductos<<endl;
+    
     
     string lines;
     while (!nuevoArchivo.eof() && nuevoArchivo.is_open()) {
@@ -92,7 +120,7 @@ void ObtenerInfo(Producto aProducto[],int capArray){
             //Lee en la linea i un string hasta que se encuentre con un espacio
             stringstream linestream(lines);
             getline(linestream,nombre,' ');
-            cout<<"La linea que lee es "<<nombre<<" va en el loop "<<i<<endl;
+           // cout<<"La linea que lee es "<<nombre<<" va en el loop "<<i<<endl;
             // Le asignamos el valor al atributo de ese producto
             aProducto[i].setNombre(nombre);
             // Lee en la linea i un int hasta que se encuentra con un espacio
@@ -103,6 +131,11 @@ void ObtenerInfo(Producto aProducto[],int capArray){
             
         }
     }
+    if (!nuevoArchivo.is_open()) {
+        cout<<"No se ha encontrado o no se ha podido abrir el archivo con ese nombre"<<endl;
+    }
+    
+    
     for (int i = 0; i<=numProductos; i++) {
         aProducto[i].mostrarProducto();
     }
@@ -112,12 +145,40 @@ void ObtenerInfo(Producto aProducto[],int capArray){
 
 }
 
+void sortProductos(Producto aProducto[],int capArray){
+    bool intercambio = true;
+    for (int i = 0; i<numProductos && intercambio; i++) {
+        intercambio = false;
+        for (int j = 0; j<(numProductos-i); j++) {
+            
+            if (aProducto[j+1]<aProducto[j]) {//Aqui usa el operador < que se definio en la clase
+                
+                Producto aux = aProducto[j];
+                aProducto[j]=aProducto[j+1];
+                aProducto[j+1]=aux;
+                intercambio=true;
+                cout<<"hubo intercambio en"<<aProducto[j].getNombre()<<" y en "<<aProducto[j+1].getNombre()<<endl;
+            }
+        }
+    }
+    
+    
+   
+}
+
+
+
+
 
 
 int main(int argc, const char * argv[]) {
     
     Producto* aProducto = new Producto[100];
     ObtenerInfo(aProducto, 100);
+    sortProductos(aProducto, 100);
+    for (int i = 0; i<=numProductos; i++) {
+           aProducto[i].mostrarProducto();
+       }
     
     return 0;
 }
