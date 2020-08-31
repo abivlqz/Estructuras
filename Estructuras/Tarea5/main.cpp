@@ -9,8 +9,6 @@
 #include <stdio.h>
 #include <iostream>
 using namespace std;
-
-   
 class Complejo{
 private:
     //atributos
@@ -22,7 +20,7 @@ public:
         this->pReal = pReal;
         this->pImag = pImag;
     }
-    //Constructor2 para un arreglo de objetos
+    //Constructor2 default o para un arreglo de objetos
     Complejo(){
         
     }
@@ -65,11 +63,15 @@ public:
         }else return false;
     }
     
-    void mostrarComplejo(){
-        cout<<"el resultado de esta operacion con complejos es "<<pReal<<" + "<<pImag<<"i "<<endl;
+    friend ostream& operator<< (ostream & out, Complejo& complejo){
+        out<<"El numero complejo es ("<<complejo.pReal<<") + ("<<complejo.pImag<<")i"<<endl;
+            return out;
     }
+   
     
 };
+
+    
 
 
 int main(){
@@ -85,12 +87,12 @@ int main(){
         cout<<"Los dos complejos son iguales "<<endl;
     }else
         cout<<"No son iguales"<<endl;
+    cout<<resultadoSuma<<endl;
+    cout<<resultadoResta<<endl;
+    cout<<resultadoMult<<endl;
+    cout<<resultadoDivision<<endl;
     
-    resultadoSuma.mostrarComplejo();
-    resultadoResta.mostrarComplejo();
-    resultadoMult.mostrarComplejo();
-    resultadoDivision.mostrarComplejo();
-    
+
     
     return 0;
 }
