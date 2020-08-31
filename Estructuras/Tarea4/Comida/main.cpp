@@ -12,100 +12,10 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
+#include "Producto.h"
 using namespace std;
 
 int numProductos;
-
-
-class Producto{
-    //Atributos
-private:
-    string nombre;
-    int gramos, calorias;
-    
-public:
-    //Constructor1
-    Producto(string nombre, int gramos, int calorias){
-        this->nombre = nombre;
-        this->gramos = gramos;
-        this->calorias = calorias;
-        
-    }
-    //Constructor2 para el arreglo de objetos
-    Producto(){
-        
-    }
-    //Metodos de acceso getters y setters
-    string getNombre(){
-        return nombre;
-    }
-    int getGramos(){
-        return gramos;
-    }
-    int getCalorias(){
-        return calorias;
-    }
-    void setNombre(string nombre){
-        this->nombre = nombre;
-    }
-    void setGramos(int gramos){
-        this->gramos = gramos;
-    }
-    void setCalorias(int calorias){
-        this->calorias = calorias;
-    }
-    // Imprime en pantalla los atributos del objeto
-    void mostrarProducto(){
-        cout<<nombre<<" ";
-        cout<<gramos<<" ";
-        cout<<calorias<<endl;
-    }
-    
-    //operador que compara dos objetos de tipo Producto
-    bool operator <(Producto& producto){
-        //Convertir los nombres de productos a letras minusculas para que la comparacion sea conforme al abecedario y no ASCII
-         string auxName1 =this->nombre,auxName2= producto.getNombre();
-        for (int i = 0; i < auxName1.length(); i++) {
-          auxName1[i] = tolower(auxName1[i]);
-        }
-        for (int i = 0; i < auxName2.length(); i++) {
-          auxName2[i] = tolower(auxName2[i]);
-        }
-        //Si el nombre del producto1 es menor al producto2 el comparador declara que el producto1
-        // es menor
-        if (auxName1<auxName2) {
-            return true;
-        }
-        else if (auxName1>auxName2){
-            return false;
-        }
-        else{//Si los nombres de productos son iguales
-            //Si los gramos del producto1 son menor a los del producto2 el comparador declara que el producto1  es menor
-            if (this->gramos<producto.getGramos()) {
-                return true;
-            }
-            else if (this->gramos>producto.getGramos()){
-                return false;
-            }
-            else{// Si la cantidad de gramos de un producto son iguales
-                 //Si las calorias del producto1 son menor a los del producto2 el comparador declara que el producto1  es menor
-                if (this->calorias<producto.getCalorias()) {
-                    return true;
-                }
-                else{
-                    return false;
-                }
-            }
-        }
-        
-        
-        
-    }
-    
-    
-};
-
 // Funcion ObtenerInfo que lee el archivo linea por linea, separa por espacios y guarda las variables en su respectivo atributo (nombre, gramos o calorías) en un arreglo de objetos de tipo Producto.
 // Sus parametros son un arreglo de objetos de la clase Producto, la dimension de dicho arreglo y el archivo abierto del que se leera la informacion, no tiene retornos.
 void ObtenerInfo(Producto aProducto[],int capArray, fstream& nuevoArchivo){
@@ -124,7 +34,6 @@ void ObtenerInfo(Producto aProducto[],int capArray, fstream& nuevoArchivo){
             //Lee en la linea i un string hasta que se encuentre con un espacio
             stringstream linestream(lines);
             getline(linestream,nombre,' ');
-           // cout<<"La linea que lee es "<<nombre<<" va en el loop "<<i<<endl;
             // Le asignamos el valor al atributo de ese producto
             aProducto[i].setNombre(nombre);
             // Lee en la linea i un int hasta que se encuentra con un espacio
@@ -137,7 +46,7 @@ void ObtenerInfo(Producto aProducto[],int capArray, fstream& nuevoArchivo){
     nuevoArchivo.close();
 }
 
-// Funcion SortProductos que ordena el arreglo de Objetos por el metodo burbuja, es decir, compara pares consecutivos de arreglos, y si el segundo es menor que el primero, los intercambia
+// Funcion SortProductos que ordena el arreglo de Objetos por el metodo burbuja, es decir, compara pares consecutivos de objetos, y si el segundo es menor que el primero, los intercambia
 // Para comparar los objetos de tipo Producto usa el operador <, que se definio en la clase Producto
 // Sus parametros son un arreglo de objetos de la clase producto, y la capacidad de dicho arreglo, no tiene retornos.
 void SortProductos(Producto aProducto[],int capArray){
@@ -185,11 +94,5 @@ int main() {
     }else{
         cout<<"No se ha encontrado el archivo o no se ha podido abrir "<<endl;
     }
-    
-    
-    
-  
-    
-    
     return 0;
 }

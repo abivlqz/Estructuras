@@ -1,0 +1,7 @@
+5
+Oreo 300 1500
+Mantequilla 100 450
+Oreo 150 800
+Fideo 100 100
+Granola 100 240
+Gomas 30 120
