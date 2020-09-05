@@ -3,8 +3,10 @@
 //  Estructuras de Datos
 //  Abigail Guadalupe Velazquez Sanchez A01566592 Grupo2
 //  Creado el 05/09/2020
-//  Este programa realiza operaciones a un vector de acuerdo a las instrucciones de un archivo txt llamado "operaciones.txt", 'a x' agrega un entero al vector,'b' ordena ascendentemente al vector, 'c' invierte el vector, 'd' imprime el tamaño del vector, 'e' imprime los elementos del vector, 'f' ordena descendentemente el vector.
-//
+//  Este programa realiza operaciones a un vector de acuerdo a las instrucciones de un archivo txt llamado "operaciones.txt", 'a x' agrega un entero al vector,
+//  'b' ordena ascendentemente al vector, 'c' invierte el vector,
+//  'd' imprime el tamaño del vector, 'e' imprime los elementos del vector, 'f' ordena descendentemente el vector.
+
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -20,7 +22,8 @@ void mostrarVector(vector<int> & vector1){
     }
 }
 
-// Funcion modificarVector que lee el archivo operaciones.txt y de acuerdo al numero de casos prueba y consultas establecidos en el mismo archivo, realiza las operaciones a x, b, c, d, e y f a un vector de enteros.
+// Funcion modificarVector que lee el archivo operaciones.txt y de acuerdo al numero de casos prueba y consultas establecidos en el mismo archivo,
+// realiza las operaciones a x, b, c, d, e y f a un vector de enteros.
 // Sus parametros son: un archivo txt abierto y un vector de tipo entero, no tiene retornos
 void modificarVector(fstream & archivo, vector<int> & vector){
     int T, Q;
