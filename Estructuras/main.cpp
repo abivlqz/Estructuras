@@ -7,9 +7,9 @@
 //
 
 #include <iostream>
-
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World Abi! This is my second commit";
+using namespace std;
+int main() {
+    //string cadena[20] = “1234567890abcdefghi”;
+   // cout<<cadena<<endl;
     return 0;
 }
