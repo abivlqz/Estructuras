@@ -54,15 +54,104 @@ public:
         Head = pNew;
     }
 
+    
+    /// Método deleteFirst
+    /// Parámetro: no recibe nada
+    /// Descripción: borra el primer nodo de la lista si hay
+
+    void deleteFirst(){
+        
+        if (Head!=NULL) {
+            Node<T> *paux=Head;
+            Head = Head->pNext;
+            delete paux;
+        }
+    }
+    
+    
    /// Método addLast
+    /// Checar si se comporta diferente con o sin nodas
     /// Parámetro: recibe un valor de tipo T
     /// Descripción: crea un nodo con el valor recibido como parámetro y lo coloca al final de la lista
-//    void addLast(T data){
-//        //Node <T> *pNew = new Node <T> (data);
+    void addLast(T data){
+        
+        Node <T> *pNew = new Node <T> (data);
+        Node<T>*aux= Head;
+        if (Head==NULL)
+            Head = pNew;
+        else{
+            while (aux->pNext!=NULL)
+                aux= aux->pNext;
+            
+            aux->pNext=pNew;
+        }
+    }
+
+    /// Método deleteLast
+    /// Parámetro: no recibe nada
+    /// Descripción: borra el primer nodo de la lista si hay
+
+//    void deleteLast(){
+//        Node<T> * paux= Head;
+//        Node<T> * paux2= NULL;
+//        if (paux!=NULL) {
+//            while (paux->pNext!=NULL) {
+//                paux2 =paux;
+//                paux=paux->pNext;
+//            }
+//            delete paux;
+//            if (paux2!=NULL) {
+//                paux2->pNext=NULL;
+//            }else
+//                Head=NULL;
 //
+//        }
 //
 //    }
+    
+    void deleteLast(){
+        Node<T> * paux= Head;
+        Node<T>*paux2= NULL;
+        int contador = 0;
+        while (contador<(getSize()-1)) {
+                paux2 = paux;
+                paux = paux->pNext;
+                contador++;
+            }
+            delete paux;
+            if (paux2!=NULL)
+              paux2->pNext=NULL;
+            else
+              Head=NULL;
+    }
+    
+    /// Método addN
+    /// Checar si se comporta diferente con o sin nodas
+    /// Parámetro: recibe un valor de tipo T y una posicion en la lista P para guardar el elemento
+    /// Descripción: crea un nodo con el valor recibido como parámetro y lo coloca en la posicion P
+    void addN(T data, int P){
 
+        Node <T> *pNew = new Node <T> (data);
+        Node<T>*aux= Head;
+        if (P==1) {
+            addFirst(data);
+        }else{
+
+        if (P<=getSize() && P>0) {
+            for (int i =1; i<P-1; i++) {
+                aux=aux->pNext;
+            }
+            pNew->pNext=aux->pNext;
+            aux->pNext=pNew;
+            
+        }
+
+        }
+
+    }
+
+    
+    
     /// Método printList
     /// Parámetro: ninguno
     /// Descripción: Muestra el contenido de los nodos de la lista
@@ -73,6 +162,32 @@ public:
             pP= pP->pNext;
         }
     }
+
+
+
+
+    /// Método getSize
+    /// Parámetro: ninguno
+    /// Descripción: calcula y regresa la cantidad de nodos.
+
+    int getSize(){
+        int contador = 0;
+        Node<T> *pP = Head;
+        
+        while (pP!=NULL) {
+            contador++;
+            pP= pP->pNext;
+        }
+        return contador;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 
 };
 
