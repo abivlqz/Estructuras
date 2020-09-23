@@ -12,12 +12,14 @@ using namespace std;
 
 int main()
 {
-    LinkedList <int> L;
-    L.addFirst(4);
-    L.addFirst(1);
-    L.addFirst(14);
-    L.addFirst(7);
     
-    L.printList();
+    int a[5]= {1,2,3,12,5};
+    int *p = a+1;
+    int *q=new int[3];
+    for (int i = 0; i<3; i++) {
+       *q= *(p++);
+        cout<<*(q)<<endl;
+    }
+     
     return 0;
 }

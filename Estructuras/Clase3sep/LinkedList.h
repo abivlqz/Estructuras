@@ -181,9 +181,34 @@ public:
         return contador;
     }
     
+   // Realiza el métodos eliminaNodo el cual recibe un número entero y borra todos los nodos que contienen dicho número
     
-    
-    
+    void eliminaNodo(int x){
+        
+        if (Head!=NULL) {
+            Node<T>* pp = Head;
+            
+            if (pp->data==x) {
+                if (pp->pNext!=NULL) {
+                    Head=Head->pNext;
+                    delete pp;
+                    pp=Head;
+                }else{
+                    delete pp;
+                    Head = NULL;
+                }
+               
+            }
+            while (pp->pNext!=NULL) {
+                if (pp->data==x) {
+                    
+                }
+            }
+        }
+        
+        
+        
+    }
     
     
     
