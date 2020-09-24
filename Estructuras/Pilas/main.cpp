@@ -16,12 +16,14 @@ bool esValido(string parentesis, Stack<char>& abiertos){
             if (abiertos.peek()=='{' && parentesis.at(i)=='}') {
                 abiertos.pop();
             }
-            if (abiertos.peek()=='(' && parentesis.at(i)==')') {
+            else if (abiertos.peek()=='(' && parentesis.at(i)==')') {
                 abiertos.pop();
             }
-            if (abiertos.peek()=='[' && parentesis.at(i)==']') {
+           else if (abiertos.peek()=='[' && parentesis.at(i)==']') {
                 abiertos.pop();
             }
+            else
+                return false;
         }
         
     
@@ -37,7 +39,7 @@ bool esValido(string parentesis, Stack<char>& abiertos){
 int main()
 {
     Stack <char> abiertos;
-    string parentesis = "{[()]({}){}}";
+    string parentesis = "{[()](()){}}";
     
     if (esValido(parentesis, abiertos))
         cout<<"El string es valido"<<endl;
