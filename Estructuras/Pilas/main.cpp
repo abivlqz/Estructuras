@@ -17,7 +17,7 @@ bool esValido(string parentesis, Stack<char>& abiertos){
                 abiertos.pop();
             }
             else if (abiertos.peek()=='(' && parentesis.at(i)==')') {
-                abiertos.pop();
+                abiertos.pop();//{
             }
            else if (abiertos.peek()=='[' && parentesis.at(i)==']') {
                 abiertos.pop();
