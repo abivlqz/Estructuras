@@ -52,7 +52,7 @@ int main(){
     
     cout<<" los numeros en el rango 3 a 15 son = "<<t.nodosRange(3, 15)<<endl;
     
-    cout<<"El numero de nodos en el nivel 4 = "<<t.anchura(3)<<endl;
+    cout<<"El numero de nodos en el nivel 5 = "<<t.anchura(5)<<endl;
      return 0;
     
 }

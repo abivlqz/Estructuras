@@ -388,16 +388,17 @@ public:
     
     int anchura (int nivel){
         NodeTree* pP=root;
-        return numNodosNivel(pP, nivel-1);
+        return numNodosNivel(pP, nivel);
     }
     
     int numNodosNivel(NodeTree* pP, int nivel){
+        nivel--;
         if (pP==NULL )
             return 0;
         else if (nivel==0)
             return 1;
         else
-            return (0+numNodosNivel(pP->Left, nivel-1)+numNodosNivel(pP->Right, nivel-1));
+            return (0+numNodosNivel(pP->Left, nivel)+numNodosNivel(pP->Right, nivel));
         
         
     }
