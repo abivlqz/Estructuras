@@ -81,6 +81,27 @@ public:
         return contador;
     }
     
+    int Acumula(int acum){
+           int contador = 0;
+           int acumulador = 0;
+           bool cumplio=false;
+           Node<T> *pP = Head;
+           while (pP!=NULL && ! cumplio) {
+               
+               if (acumulador<acum) {
+                   contador++;
+                   acumulador+=pP->data;
+               }else {
+                   cumplio=true;
+               }
+              
+               pP= pP->pNext;
+           }
+           return contador;
+       }
+    
+    
+    
     /// Método intercambiarDatos
     /// Parámetro: dos apuntadores de tipo nodo.
     /// Descripción: Intercambia los datos entre nodos.

@@ -23,6 +23,15 @@ int sumaDependencias(char mat[MAX][MAX], int numNodos){
     return sumDep;
 }
 
+void llenarMatriz (char mat[MAX][MAX], int numNodos){
+    for(int i=0;i<numNodos;i++){
+        for(int j=0;j<numNodos;j++){
+        cout<<"Escribe la dependencia ("<<i<<","<<j<<")"<<endl;
+        cin>>mat[i][j];
+        }
+    }
+}
+
 int main()
 {
     char matriz[MAX][MAX];
